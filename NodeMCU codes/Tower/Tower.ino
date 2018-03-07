@@ -35,7 +35,7 @@ void sendTemperature(){
     StaticJsonBuffer<300> JSONbuffer;   //Declaring static JSON buffer
     JsonObject& JSONencoder = JSONbuffer.createObject(); 
  
-    JSONencoder["farm_id"] = 01;
+    JSONencoder["plant_id"] = 01;
     JSONencoder["temperature"] = 100;
     JSONencoder["time_stamp"] = "10:30:01";   
  
