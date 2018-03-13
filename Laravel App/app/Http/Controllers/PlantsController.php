@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Plant;
+use App\Temperature;
+use Khill\Lavacharts\Lavacharts;
+use \Lava as Lava;
 
 class PlantsController extends Controller {
 	//
@@ -12,6 +15,31 @@ class PlantsController extends Controller {
 	}
 
 	public function show(Plant $plant) {
+		$stocksTable = Lava::DataTable();  // Lava::DataTable() if using Laravel
+        $data = Temperature::where('plant_id',$plant->id)             
+                ->get();
+
+        $stocksTable->addStringColumn('Time')
+                    ->addNumberColumn('Temperature');
+
+        foreach ($data as $datum) {
+            $stocksTable->addRow([
+                $datum->time,$datum->temperature
+            ]);
+        }
+        $test = Temperature::all();
+        // dd($plant);
+
+         $chart = Lava::LineChart('MyStocks', $stocksTable)
+        ->setOptions([
+            'datatable' => $stocksTable,
+            'title' => 'Temperature variation',
+            'pointSize' => 5,
+            'lineWidth' => 2,
+            'vAxis' => ['ticks' => [0,25,50,75,100],'title'=>'Temperature'],
+            'hAxis' => ['title'=>'Time'],
+            'axisTitlesPosition' => 'out',
+            ]);
 
 		return view('plant', compact('plant'));
 	}
