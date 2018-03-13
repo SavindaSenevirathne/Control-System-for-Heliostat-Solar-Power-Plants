@@ -1,21 +1,31 @@
 <h2>Power Plants</h2>
-<div class="table-responsive">
-  <table class="table table-striped table-sm">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Location</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($plants as $plant)
-      <tr>
-        <td>{{ $plant->id }}</td>
-        <td><a href="/plants/{{ $plant->id }}">{{ $plant->name }}</a></td>
-        <td>{{ $plant->location }}</td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
+
+<div class="row">
+   @foreach ($plants as $plant)
+  <div class="col-md-4">
+      <div class="card mb-4 box-shadow">
+        <img class="card-img-top" src="img/heli1.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h4>{{ $plant->name }}</h4>
+          <p class="card-text">Breif summary goes here</p>
+          <table class="table table-striped table-sm">
+            <tr>
+              <td>Temperature</td>
+              <td align="right">0</td>
+            </tr>
+            <tr>
+              <td>Power</td>
+              <td align="right">0</td>
+            </tr>
+          </table>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a href="/plants/{{ $plant->id }}"><button type="button" class="btn btn-sm btn-outline-secondary">Details</button></a>
+            </div>
+            <small class="text-muted">Location - {{ $plant->location }}</small>
+          </div>
+        </div>
+      </div>
+  </div>
+   @endforeach
 </div>
