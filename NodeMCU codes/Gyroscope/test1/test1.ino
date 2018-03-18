@@ -67,15 +67,15 @@ void loop() {
 
 
   
-  int x_rel = analogRead(xpin) - x_ref;
+  float x_rel = analogRead(xpin) - x_ref;
   float y_rel = analogRead(ypin) - y_ref;
-  int z_rel = analogRead(zpin) - z_ref;
+  float z_rel = analogRead(zpin) - z_ref;
   // Referenced readings  
   // print the sensor values:
   Serial.print("X - axis");
   // print a tab between values:
   Serial.print("\t");
-  Serial.print(x_rel);
+  Serial.print((x_rel/67)*90);
   // print a tab between values:
   Serial.print("\t");
   Serial.print("Y - axis");
@@ -87,7 +87,7 @@ void loop() {
   Serial.print("Z - axis");
   // print a tab between values:
   Serial.print("\t");
-  Serial.print(z_rel);
+  Serial.print((z_rel/67)*90);
   Serial.println();
   // delay before next reading:
   delay(100);

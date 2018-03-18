@@ -7,6 +7,7 @@
 
 const char* ssid = "Senevirathne";
 const char* password = "SuduBruno6694";
+String mirrorState = "";
 
 ESP8266WebServer server(80);
 
@@ -45,7 +46,7 @@ void sendTemperature(){
  
     HTTPClient http;    //Declare object of class HTTPClient
  
-    http.begin("http://192.168.1.6:8000/api/temperatures");      //Specify request destination
+    http.begin("http://192.168.1.3:8000/api/temperatures");      //Specify request destination
     http.addHeader("Content-Type", "application/json");  //Specify content-type header
     
     int httpCode = http.POST(JSONmessageBuffer);   //Send the request
@@ -66,11 +67,15 @@ void mirrors(){
  
     JSONencoderMirror["azimuth"] = 0;
     JSONencoderMirror["altitude"] = 0; 
- 
+
+    
+    mirrorState = server.arg("status"); //State feedback from the mirror
+    
     char JSONmessageBuffer[300];
     JSONencoderMirror.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
     Serial.println("Mirror request");
     Serial.println(JSONmessageBuffer);
+    Serial.println("Status "+mirrorState);
     server.send(200, "application/json",JSONmessageBuffer );
 }
 
@@ -79,6 +84,7 @@ void mirrors(){
 void setup(void){
   Serial.begin(115200);
   WiFi.mode(WIFI_STA);
+  
   WiFi.begin(ssid, password);
   Serial.println("");
 
@@ -99,7 +105,7 @@ void setup(void){
 
   server.on("/", handleRoot);
 
-  server.on("/mirrors", mirrors );
+  server.on("/mirrors/", mirrors );
 
   server.onNotFound(handleNotFound);
 
