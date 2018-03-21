@@ -38,7 +38,7 @@ void sendTemperature(){
  
     JSONencoder["plant_id"] = 01;
     JSONencoder["temperature"] = 100;
-    JSONencoder["time_stamp"] = "10:30:01";   
+//    JSONencoder["time_stamp"] = "10:30:01";   
  
     char JSONmessageBuffer[300];
     JSONencoder.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
@@ -46,7 +46,7 @@ void sendTemperature(){
  
     HTTPClient http;    //Declare object of class HTTPClient
  
-    http.begin("http://192.168.1.3:8000/api/temperatures");      //Specify request destination
+    http.begin("http://192.168.1.7:8000/api/temperatures");      //Specify request destination
     http.addHeader("Content-Type", "application/json");  //Specify content-type header
     
     int httpCode = http.POST(JSONmessageBuffer);   //Send the request

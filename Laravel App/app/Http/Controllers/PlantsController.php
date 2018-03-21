@@ -6,6 +6,7 @@ use App\Temperature;
 use Khill\Lavacharts\Lavacharts;
 use \Lava as Lava;
 
+
 class PlantsController extends Controller {
 	//
 	public function index() {
@@ -16,15 +17,20 @@ class PlantsController extends Controller {
 
 	public function show(Plant $plant) {
 		$stocksTable = Lava::DataTable();  // Lava::DataTable() if using Laravel
-        $data = Temperature::where('plant_id',$plant->id)             
-                ->get();
+        $data = Temperature::where('plant_id',$plant->id)
+                ->orderBy('id','desc')
+                ->take(20)             
+                ->get()
+                ->reverse();
 
         $stocksTable->addStringColumn('Time')
                     ->addNumberColumn('Temperature');
 
+
         foreach ($data as $datum) {
+            $date = explode(" ", $datum->time);
             $stocksTable->addRow([
-                $datum->time,$datum->temperature
+                $date[1],$datum->temperature
             ]);
         }
         $test = Temperature::all();
@@ -43,4 +49,6 @@ class PlantsController extends Controller {
 
 		return view('plant', compact('plant'));
 	}
+
+
 }
