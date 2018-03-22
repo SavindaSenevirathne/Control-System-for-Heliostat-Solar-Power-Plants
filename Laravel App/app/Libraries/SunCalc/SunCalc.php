@@ -1,5 +1,6 @@
 <?php
-namespace Lib\SunCalc;
+namespace App\Libraries\SunCalc;
+use \DateTime;
 /*
  SunCalc is a PHP library for calculating sun/moon position and light phases.
  https://github.com/gregseth/suncalc-php

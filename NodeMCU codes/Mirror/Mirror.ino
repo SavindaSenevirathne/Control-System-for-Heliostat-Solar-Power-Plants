@@ -29,7 +29,7 @@ void loop() {
  
         HTTPClient http;  //Declare an object of class HTTPClient     
       
-      http.begin("http://192.168.1.2/mirrors/?status="+state);  //Specify request destination
+      http.begin("http://192.168.1.4/mirrors/?status="+state);  //Specify request destination
       Serial.print("sending request.....");
       int httpCode = http.GET();                                                                  //Send the request
       Serial.println(httpCode);

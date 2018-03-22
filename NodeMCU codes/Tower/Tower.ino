@@ -8,6 +8,8 @@
 const char* ssid = "Senevirathne";
 const char* password = "SuduBruno6694";
 String mirrorState = "";
+double azimuth=0;
+double altitude=0;
 
 ESP8266WebServer server(80);
 
@@ -51,10 +53,23 @@ void sendTemperature(){
     
     int httpCode = http.POST(JSONmessageBuffer);   //Send the request
 
-    String payload = http.getString();                                        //Get the response payload
+//    String payload = http.getString();                                        //Get the response payload
  
     Serial.println(httpCode);   //Print HTTP return code
-    Serial.println(payload);    //Print request response payload
+//    Serial.println(payload);    //Print request response payload
+
+    const size_t capacity = JSON_OBJECT_SIZE(2) + 60; //calculating the required size
+    DynamicJsonBuffer jsonBuffer(capacity);
+    JsonObject& pos = jsonBuffer.parseObject(http.getString());
+  
+    // Extract values
+    Serial.println(("Response:"));
+    azimuth = pos["azimuth"];
+    altitude = pos["altitude"];
+    Serial.print("Azimuth = ");
+    Serial.println(azimuth,13);
+    Serial.print("Altitude = ");
+    Serial.println(altitude,13);
  
     http.end();  //Close connection
 //    delay(30000);//delay 30s
@@ -65,8 +80,8 @@ void mirrors(){
     StaticJsonBuffer<300> JSONbuffer;   //Declaring static JSON buffer
     JsonObject& JSONencoderMirror = JSONbuffer.createObject(); 
  
-    JSONencoderMirror["azimuth"] = 0;
-    JSONencoderMirror["altitude"] = 0; 
+    JSONencoderMirror["azimuth"] = azimuth;
+    JSONencoderMirror["altitude"] = altitude; 
 
     
     mirrorState = server.arg("status"); //State feedback from the mirror

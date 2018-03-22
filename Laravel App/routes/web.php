@@ -18,7 +18,7 @@ Route::get('plants/{plant}', 'PlantsController@show');
 
 Auth::routes();
 
-
+Route::get('/Position', 'TemperatureController@Position');
 
 
 // Route::get('/home', 'HomeController@index')->name('home');
