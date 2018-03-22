@@ -5,12 +5,15 @@ use App\Plant;
 use App\Temperature;
 use Khill\Lavacharts\Lavacharts;
 use \Lava as Lava;
+use Lib\SunCalc;
 
 
 class PlantsController extends Controller {
-	//
-	public function index() {
+    //
+    public function index() {
 
+        $sc = new SunCalc(new DateTime(), 48.85, 2.35);
+        dd(base_path());
 		$plants = Plant::all();
 		return view('plants', compact('plants'));
 	}
