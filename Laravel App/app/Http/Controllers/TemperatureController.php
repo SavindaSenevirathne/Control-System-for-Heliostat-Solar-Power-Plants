@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Temperature;
+use App\Plant;
 use App\Libraries\SunCalc\SunCalc;
 use Carbon\Carbon;
 
@@ -18,7 +19,10 @@ class TemperatureController extends Controller
     	$data->time = "$time";
     	$data->save();
 
-        $sc = new SunCalc(Carbon::now(), 7.199655, 79.895354);
+        $plant = Plant::find($request->get('plant_id'));
+        $latitude = $plant->latitude;
+        $longitude = $plant->longitude;
+        $sc = new SunCalc(Carbon::now(), $latitude, $longitude);
         // get position of the sun (azimuth and altitude) at given position
         $position = $sc->getSunPosition();
         return response()->json($position);

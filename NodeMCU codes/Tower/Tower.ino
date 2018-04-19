@@ -5,8 +5,8 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "Senevirathne";
-const char* password = "SuduBruno6694";
+const char* ssid = "SavindaSenevirathne";
+const char* password = "SuduBrunoSuki6694";
 String mirrorState = "";
 double azimuth=0;
 double altitude=0;
@@ -48,7 +48,7 @@ void sendTemperature(){
  
     HTTPClient http;    //Declare object of class HTTPClient
  
-    http.begin("http://192.168.1.7:8000/api/temperatures");      //Specify request destination
+    http.begin("http://192.168.1.2:8000/api/temperatures");      //Specify request destination
     http.addHeader("Content-Type", "application/json");  //Specify content-type header
     
     int httpCode = http.POST(JSONmessageBuffer);   //Send the request
