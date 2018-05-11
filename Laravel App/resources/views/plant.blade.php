@@ -1,4 +1,4 @@
-@extends ('layouts.master')
+@extends ('layouts.layout')
 
 @section ('styles')
 	<link href="/css/dashboard.css" rel="stylesheet">

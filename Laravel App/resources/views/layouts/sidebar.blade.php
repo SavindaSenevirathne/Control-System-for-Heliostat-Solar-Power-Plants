@@ -1,74 +1,36 @@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
-  <div class="sidebar-sticky">
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link" href="/home">
-          <span data-feather="home"></span>
-          Overview <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/plants">
-          <span data-feather="sun"></span>
-          Plants
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="power"></span>
-          Power Generation
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="users"></span>
-          Customers
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="bar-chart-2"></span>
-          Reports
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="dollar-sign"></span>
-          Income
-        </a>
-      </li>
-    </ul>
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-    <span>Saved reports</span>
-    <a class="d-flex align-items-center text-muted" href="#">
-      <span data-feather="plus-circle"></span>
-    </a>
-    </h6>
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text"></span>
-          Current month
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text"></span>
-          Last quarter
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text"></span>
-          Social engagement
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text"></span>
-          Year-end sale
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="/img/users/default.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>{{ Auth::user()->name }}</p>
+          <!-- Status -->
+          <a href="#"> {{ Auth::user()->email }}</a>
+        </div>
+      </div>
+
+
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header"></li>
+        <!-- Optionally, you can add icons to the links -->
+        <li><a href="/home"><i class="fa fa-line-chart"></i> <span>Overview</span></a></li>
+        <li><a href="/plants"><i class="fa fa-line-chart"></i> <span>Plants</span></a></li>
+        <li><a href="#"><i class="fa fa-line-chart"></i> <span>Power Generation</span></a></li>
+        <li><a href="#"><i class="fa fa-line-chart"></i> <span>Customers</span></a></li>
+        <li><a href="#"><i class="fa fa-line-chart"></i> <span>Reports</span></a></li>
+        <li><a href="#"><i class="fa fa-line-chart"></i> <span>Income</span></a></li>
+        
+        {{-- <li><a href="/home/media"><i class="fa fa-file-image-o"></i> <span>Media Manager</span></a></li> --}}
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
