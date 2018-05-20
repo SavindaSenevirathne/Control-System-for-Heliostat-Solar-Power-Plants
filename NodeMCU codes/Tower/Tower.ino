@@ -4,12 +4,20 @@
 #include <ESP8266mDNS.h>
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+#define ONE_WIRE_BUS D3
+ 
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
 
 const char* ssid = "SavindaSenevirathne";
-const char* password = "SuduBrunoSuki6694";
+const char* password = "$uduBruno$uki";
 String mirrorState = "";
 double azimuth=0;
 double altitude=0;
+double temperature;
 
 ESP8266WebServer server(80);
 
@@ -33,14 +41,17 @@ void handleNotFound(){
   server.send(404, "text/plain", message);
 }
 
+void measureTemperature(){
+  sensors.requestTemperatures();
+  temperature = sensors.getTempCByIndex(0);
+}
 
 void sendTemperature(){
     StaticJsonBuffer<300> JSONbuffer;   //Declaring static JSON buffer
     JsonObject& JSONencoder = JSONbuffer.createObject(); 
  
     JSONencoder["plant_id"] = 01;
-    JSONencoder["temperature"] = 100;
-//    JSONencoder["time_stamp"] = "10:30:01";   
+    JSONencoder["temperature"] = temperature;
  
     char JSONmessageBuffer[300];
     JSONencoder.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
@@ -126,14 +137,17 @@ void setup(void){
 
   server.begin();
   Serial.println("HTTP server started");
+  sensors.begin();
 }
 int i=0;
 void loop(void){
   if(i%30==0){
-  sendTemperature();
+    measureTemperature();   
+    sendTemperature();    
   }else{
-  server.handleClient();
+    server.handleClient();
   }
+  
   i = i+1;
   delay(1000);
 }

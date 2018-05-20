@@ -47,7 +47,7 @@ class PlantsController extends Controller {
             'title' => 'Temperature variation',
             'pointSize' => 5,
             'lineWidth' => 2,
-            'vAxis' => ['ticks' => [0,25,50,75,100],'title'=>'Temperature'],
+            'vAxis' => ['title'=>'Temperature'],
             'hAxis' => ['title'=>'Time'],
             'axisTitlesPosition' => 'out',
             ]);
@@ -78,7 +78,7 @@ class PlantsController extends Controller {
         $labels = Temperature::pluck('Time')->toArray();
         // dd($data);
         $chart->labels($labels);
-        $chart->dataset('Sample', 'line', $data);
+        $chart->dataset('Temperature', 'line', $data);
 
         return view('test',compact('chart'));
     }

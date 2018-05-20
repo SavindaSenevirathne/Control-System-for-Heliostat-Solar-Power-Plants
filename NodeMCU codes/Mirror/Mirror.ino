@@ -4,7 +4,7 @@
 #include <Servo.h> 
 
 const char* ssid = "SavindaSenevirathne";
-const char* password = "$uduBruno$uki6694";
+const char* password = "$uduBruno$uki";
 String state = "OK";
 
 float azimuth = 0;
