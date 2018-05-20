@@ -13,6 +13,13 @@
 	         <div id="temp-chart" style="height: 300px"></div>
 	    </div>
     </div>
+    <div id="my-dash">
+	        <div id="chart">
+	        </div>
+	        <div id="control">
+	        </div>
+    	</div>
 @endsection
 
    {!! \Lava::render('LineChart', 'MyStocks', 'temp-chart') !!}
+   {{-- {!! \Lava::render('Dashboard', 'MyStocks', 'my-dash') !!} --}}

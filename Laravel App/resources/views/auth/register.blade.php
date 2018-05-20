@@ -38,6 +38,32 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="nic" class="col-md-4 col-form-label text-md-right">NIC Number</label>
+
+                            <div class="col-md-6">
+                                <input id="nic" type="text" class="form-control{{ $errors->has('nic') ? ' is-invalid' : '' }}" name="nic" value="{{ old('nic') }}" required>
+
+                                @if ($errors->has('nic'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('nic') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="contact_no" class="col-md-4 col-form-label text-md-right">Contact Number</label>
+
+                            <div class="col-md-6">
+                                <input id="contact_no" type="text" class="form-control{{ $errors->has('contact_no') ? ' is-invalid' : '' }}" name="contact_no" value="{{ old('contact_no') }}" required>
+
+                                @if ($errors->has('contact_no'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('contact_no') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>

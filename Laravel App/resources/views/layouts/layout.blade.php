@@ -15,6 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="/css/bootstrap.min-3_7.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+
   <!-- Ionicons -->
   <link rel="stylesheet" href="/css/ionicons.min.css">
   <!-- Theme style -->
@@ -56,7 +57,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini ">
+<body class="hold-transition skin-black sidebar-mini ">
 
 <div class="wrapper">
 
@@ -70,6 +71,20 @@ desired effect
   <div class="content-wrapper">
     <!-- Main content -->
     <section class="content container-fluid">
+  @if ($message = Session::get('success'))
+  <div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button> 
+          <strong>{{ $message }}</strong>
+  </div>
+  @endif
+
+
+  @if ($message = Session::get('error'))
+  <div class="alert alert-danger alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button> 
+          <strong>{{ $message }}</strong>
+  </div>
+    @endif
       @yield('content')
       <!--------------------------
         | Your Page Content Here |
@@ -104,6 +119,9 @@ desired effect
 <script src="/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/js/custom.min.js"></script>
+<!-- HighCharts -->
+<script src=//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js charset=utf-8></script>
+<script src=//cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.6/highcharts.js charset=utf-8></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

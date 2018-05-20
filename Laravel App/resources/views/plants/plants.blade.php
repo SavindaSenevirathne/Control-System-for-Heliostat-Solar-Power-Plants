@@ -5,8 +5,12 @@
 @endsection
 
 @section ('content')
-	<h2>Power Plants</h2>
 
+	<div class="pull-right">
+		<a href="/plants/add" class="btn btn-primary btn-block"><b>Add New Plant</b></a>
+	</div>
+	
+	<h2>Power Plants</h2>
 	<div class="row">
 	   @foreach ($plants as $plant)
 		  <div class="col-md-4">

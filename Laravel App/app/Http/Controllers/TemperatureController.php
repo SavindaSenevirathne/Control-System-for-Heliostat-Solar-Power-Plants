@@ -10,6 +10,11 @@ use Carbon\Carbon;
 
 class TemperatureController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+    
     public function save(Request $request)
     {
     	$data = new Temperature;

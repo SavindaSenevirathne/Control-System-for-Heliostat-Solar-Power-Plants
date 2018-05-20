@@ -17,7 +17,7 @@ class CreateTemperaturesTable extends Migration
             $table->increments('id');
             $table->integer('plant_id');
             $table->integer('temperature');
-            $table->string('time');
+            $table->datetime('time');
             $table->timestamps();
         });
     }

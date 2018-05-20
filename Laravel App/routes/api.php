@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/temperatures','TemperatureController@save');
+// Route::get('/test_data', 'PlantsController@response');
