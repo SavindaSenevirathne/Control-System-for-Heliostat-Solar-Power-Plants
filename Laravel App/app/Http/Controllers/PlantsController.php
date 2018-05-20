@@ -20,28 +20,23 @@ class PlantsController extends Controller {
 		return view('plants.plants', compact('plants'));
 	}
 
-	public function show(Plant $plant) {
+	public function show() {
 		$stocksTable = Lava::DataTable();  // Lava::DataTable() if using Laravel
-        $data = Temperature::where('plant_id',$plant->id)
-                ->orderBy('id','desc')
-                ->take(20)             
-                ->get()
-                ->reverse();
+        $data = $this->getData();
 
         $stocksTable->addStringColumn('Time')
                     ->addNumberColumn('Temperature');
 
+        dd($data);
 
-        foreach ($data as $datum) {
-            $date = explode(" ", $datum->time);
-            $stocksTable->addRow([
-                $date[1],$datum->temperature
-            ]);
-        }
-        // $test = Temperature::all();
-        // dd($plant);
+        // foreach ($data as $datum) {
 
-         $chart = Lava::LineChart('MyStocks', $stocksTable)
+        //     $stocksTable->addRow([
+        //         $datum[0],$datum[1]
+        //     ]);
+        // }
+
+        $chart = Lava::LineChart('MyStocks', $stocksTable)
         ->setOptions([
             'datatable' => $stocksTable,
             'title' => 'Temperature variation',
@@ -52,9 +47,62 @@ class PlantsController extends Controller {
             'axisTitlesPosition' => 'out',
             ]);
 
-
 		return view('plants.plant', compact('plant'));
 	}
+
+    public function getData(Plant $plant)
+    {
+        $temperatureArray = array();
+
+        $data = Temperature::where('plant_id',$plant->id)
+                ->orderBy('id','desc')
+                ->take(20)             
+                ->get()
+                ->reverse();
+
+        foreach ($data as $datum) {
+            $date = explode(" ", $datum->time);
+            $temperatureArray[datum]['time'] = $date[1];
+            $temperatureArray[datum]['temperature'] = $datum->temperature;
+        }
+
+        return temperatureArray;
+    }
+
+    public function update()
+    {
+        $response = new Symfony\Component\HttpFoundation\StreamedResponse(function() {
+            $old_data = array();
+
+            while (true) {
+                $new_data = $this->getData();
+                $changed_data = $this->getChangedData($old_data, $new_data);
+
+                if (count($changed_data)) {
+                    echo 'data: ' . json_encode($changed_data) . "\n\n";
+                    ob_flush();
+                    flush();
+                }
+                sleep(3);
+                $old_data = $new_data;
+            }
+        });
+
+        $response->headers->set('Content-Type', 'text/event-stream');
+        return $response;
+    }
+
+    protected function getChangedData($old_data, $new_data);
+    {
+        $ret = array();
+        foreach ($new_data as $curr => $curr_info) {
+            $ret[$curr]['time'] = $curr_info['time'];
+            $ret[$curr]['temperature'] = $curr_info['temperature'];                
+        }
+
+        return $ret;
+    }
+
     public function add()
     {
         return view('plants.add');

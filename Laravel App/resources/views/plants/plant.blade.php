@@ -23,3 +23,16 @@
 
    {!! \Lava::render('LineChart', 'MyStocks', 'temp-chart') !!}
    {{-- {!! \Lava::render('Dashboard', 'MyStocks', 'my-dash') !!} --}}
+
+<script type="text/javascript">
+        var eventSource = new EventSource("<?php echo action('PlantsController@update'); ?>");
+        eventSource.addEventListener("message", function(e) {
+            arr = JSON.parse(e.data);
+            
+            for (x in arr) {    	
+                $('[data-symbol-price="' + x + '"]').html(arr[x].price);
+                $('[data-symbol-status="' + x + '"]').html(arr[x].status);
+                //apply some effect on change, like blinking the color of modified cell...
+            }
+        }, false);
+</script>    
