@@ -18,15 +18,15 @@
 		        <img class="card-img-top" src="img/heli1.jpg" alt="Card image cap">
 		        <div class="card-body">
 		          <h4>{{ $plant->name }}</h4>
-		          <p class="card-text">Brief summary goes here</p>
+		          <p class="card-text"></p>
 		          <table class="table table-striped table-sm">
 		            <tr>
-		              <td>Temperature</td>
-		              <td align="right">0</td>
+		              <td>Latitude</td>
+		              <td align="right">{{ $plant->latitude }}</td>
 		            </tr>
 		            <tr>
-		              <td>Power</td>
-		              <td align="right">0</td>
+		              <td>Longitude</td>
+		              <td align="right">{{ $plant->longitude }}</td>
 		            </tr>
 		          </table>
 		          <div class="d-flex justify-content-between align-items-center">

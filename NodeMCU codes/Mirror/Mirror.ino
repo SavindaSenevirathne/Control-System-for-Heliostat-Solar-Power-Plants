@@ -7,6 +7,10 @@ const char* ssid = "SavindaSenevirathne";
 const char* password = "$uduBruno$uki";
 String state = "OK";
 
+float x = 1;
+float y = 1;
+float height = 1;
+
 float azimuth = 0;
 float altitude = 0;
 Servo altitudeServo,azimuthServo;  // create servo object to control a servo 
@@ -16,6 +20,16 @@ void servo(int azimuth, int altitude){
   azimuthServo.write(azimuth);
   altitudeServo.write(altitude);  
   
+}
+
+float azimuthCorrection(float azimuth){
+  float ans = (azimuth - atan(y/x))/2;
+  return (ans *180)/3.1415926535898;
+}
+
+float altitudeCorrection(float altitude){
+  float ans = (altitude - atan(height/x))/2;
+  return (ans *180)/3.1415926535898;
 }
 
 void setup () {
@@ -29,7 +43,7 @@ void setup () {
  
   }
   Serial.println("Connected");
-  
+
   altitudeServo.attach(2);  // D4 - altitude servo
   azimuthServo.attach(4); //D2 - azimuth servo
 }
@@ -41,9 +55,9 @@ void loop() {
  
         HTTPClient http;  //Declare an object of class HTTPClient     
       
-        http.begin("http://192.168.1.4/mirrors/?status="+state);  //Specify request destination
+        http.begin("http://192.168.1.3/mirrors/?status="+state);  //Specify request destination
         Serial.print("sending request.....");
-        int httpCode = http.GET();                                                                  //Send the request
+        int httpCode = http.GET();//Send the request
         Serial.println(httpCode);
         if (httpCode > 0) { //Check the returning code
           
@@ -55,12 +69,16 @@ void loop() {
           Serial.println(("Response:"));
           azimuth = root["azimuth"];
           altitude = root["altitude"];
+          
           Serial.print("Azimuth = ");
           Serial.println(azimuth);
           Serial.print("Altitude = ");
           Serial.println(altitude);
-
-          servo(azimuth,altitude);                    
+          
+          float correctedAzimuth = azimuthCorrection(azimuth);
+          float correctedAltitude = altitudeCorrection(altitude);
+          
+          servo(correctedAzimuth,correctedAltitude);                    
      
         }
 

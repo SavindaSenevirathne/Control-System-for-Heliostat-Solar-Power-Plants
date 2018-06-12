@@ -27,6 +27,7 @@ class TemperatureController extends Controller
         $plant = Plant::find($request->get('plant_id'));
         $latitude = $plant->latitude;
         $longitude = $plant->longitude;
+
         $sc = new SunCalc(Carbon::now(), $latitude, $longitude);
         // get position of the sun (azimuth and altitude) at given position
         $position = $sc->getSunPosition();
@@ -47,7 +48,7 @@ class TemperatureController extends Controller
         // get sun's azimuth in degrees
         $posAzimuth = $position->azimuth * 180 / M_PI;
         
-        dd($position);
+        dd(M_PI);
         
     }
 }

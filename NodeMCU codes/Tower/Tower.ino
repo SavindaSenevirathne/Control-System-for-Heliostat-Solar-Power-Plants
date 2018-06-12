@@ -76,14 +76,17 @@ void sendTemperature(){
     // Extract values
     Serial.println(("Response:"));
     azimuth = pos["azimuth"];
+//    azimuth = (azimuth *180)/3.1415926535898;
     altitude = pos["altitude"];
+//    altitude = (altitude *180)/3.1415926535898;
+//    azimuth = 50;
+//    altitude = 50;
     Serial.print("Azimuth = ");
-    Serial.println(azimuth,13);
+    Serial.println((azimuth *180)/3.1415926535898,13);
     Serial.print("Altitude = ");
-    Serial.println(altitude,13);
+    Serial.println((altitude *180)/3.1415926535898,13);
  
     http.end();  //Close connection
-//    delay(30000);//delay 30s
 
 }
 
