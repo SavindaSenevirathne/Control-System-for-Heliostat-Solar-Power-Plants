@@ -12,8 +12,8 @@
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
-const char* ssid = "SavindaSenevirathne";
-const char* password = "$uduBruno$uki";
+const char* ssid = "SoAp";
+const char* password = "uzumaki.naruto";
 String mirrorState = "";
 double azimuth=0;
 double altitude=0;
