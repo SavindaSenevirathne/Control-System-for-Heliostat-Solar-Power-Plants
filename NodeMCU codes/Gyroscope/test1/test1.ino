@@ -26,8 +26,8 @@
 
 // these constants describe the pins. They won't change:
   const int xpin = A0;                  // x-axis of the accelerometer
-  const int ypin = A1;                  // y-axis
-  const int zpin = A2;                  // z-axis (only on 3-axis models)
+//  const int ypin = A1;                  // y-axis
+//  const int zpin = A2;                  // z-axis (only on 3-axis models)
   
   int x_ref = 334;
   int y_ref = 334;
@@ -67,28 +67,34 @@ void loop() {
 
 
   
-  int x_rel = analogRead(xpin) - x_ref;
-  float y_rel = analogRead(ypin) - y_ref;
-  int z_rel = analogRead(zpin) - z_ref;
-  // Referenced readings  
-  // print the sensor values:
+//  float x_rel = analogRead(xpin) - x_ref;
+  float x_rel = analogRead(xpin);
   Serial.print("X - axis");
   // print a tab between values:
   Serial.print("\t");
   Serial.print(x_rel);
-  // print a tab between values:
-  Serial.print("\t");
-  Serial.print("Y - axis");
-  // print a tab between values:
-  Serial.print("\t");
-  Serial.print((y_rel/64)*90);
-  // print a tab between values:
-  Serial.print("\t");
-  Serial.print("Z - axis");
-  // print a tab between values:
-  Serial.print("\t");
-  Serial.print(z_rel);
   Serial.println();
+//  float y_rel = analogRead(ypin) - y_ref;
+//  float z_rel = analogRead(zpin) - z_ref;
+  // Referenced readings  
+  // print the sensor values:
+//  Serial.print("X - axis");
+//  // print a tab between values:
+//  Serial.print("\t");
+//  Serial.print((x_rel/67)*90);
+//  // print a tab between values:
+//  Serial.print("\t");
+//  Serial.print("Y - axis");
+//  // print a tab between values:
+//  Serial.print("\t");
+//  Serial.print((y_rel/64)*90);
+//  // print a tab between values:
+//  Serial.print("\t");
+//  Serial.print("Z - axis");
+//  // print a tab between values:
+//  Serial.print("\t");
+//  Serial.print((z_rel/67)*90);
+//  Serial.println();
   // delay before next reading:
   delay(100);
  
